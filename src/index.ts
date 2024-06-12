@@ -18,6 +18,9 @@ export default new Game({
       }
     }
   },
+  render: {
+    pixelArt: true
+  },
   scene: [
     BootloaderScene,
     StartScene,
