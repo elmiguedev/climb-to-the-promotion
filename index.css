@@ -1,0 +1,87 @@
+html,
+body {
+  background: linear-gradient(135deg, rgb(39, 45, 91) 20%, rgb(78, 5, 40)) fixed rgb(39, 45, 91)
+}
+
+canvas {
+  display: block;
+  margin: auto;
+  -webkit-box-shadow: 0px 2px 15px -3px #000000;
+  box-shadow: 0px 2px 15px -3px #000000;
+}
+
+#canvas {
+  padding-top: 20px;
+  height: 85%;
+}
+
+.credits {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-weight: bold;
+  text-align: center;
+  word-spacing: 4px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding-top: 10px;
+  color: white;
+}
+
+.credits a {
+  color: dodgerblue;
+  text-decoration: none;
+  margin-left: 8px;
+}
+
+.credits i {
+  color: dodgerblue;
+  font-size: 22px;
+  margin-left: 6px;
+}
+
+.credits a::before {
+  color: dodgerblue;
+}
+
+.github-corner:hover .octo-arm {
+  animation: octocat-wave 560ms ease-in-out
+}
+
+@keyframes octocat-wave {
+
+  0%,
+  100% {
+    transform: rotate(0)
+  }
+
+  20%,
+  60% {
+    transform: rotate(-25deg)
+  }
+
+  40%,
+  80% {
+    transform: rotate(10deg)
+  }
+}
+
+@media (max-width:500px) {
+  .github-corner:hover .octo-arm {
+    animation: none
+  }
+
+  .github-corner .octo-arm {
+    animation: octocat-wave 560ms ease-in-out
+  }
+
+  canvas {
+    width: 99%;
+    margin-bottom: 10px;
+  }
+
+  #canvas {
+    margin-top: 20px;
+    height: auto !important;
+  }
+}
