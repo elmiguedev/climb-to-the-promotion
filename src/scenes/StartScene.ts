@@ -43,7 +43,7 @@ export class StartScene extends Scene {
     const y = -100;
 
     this.player = new Player(this, x, y);
-    // this.player.startClimb();
+    this.player.startClimb();
   }
 
   createCursors() {
@@ -60,7 +60,7 @@ export class StartScene extends Scene {
 
   createCamera() {
     const towerHeight = this.tower.getHeight() + 1000;
-    const x = -320;
+    const x = 0;//-320;
     const y = -towerHeight
     const width = (160 * 4) + 420
     const height = towerHeight;
@@ -72,7 +72,7 @@ export class StartScene extends Scene {
       height
     );
     this.cameras.main.startFollow(this.player);
-    // this.cameras.main.followOffset.set(0, 200);
+    this.cameras.main.followOffset.set(width, 200);
   }
 
   checkCursors() {

@@ -6,7 +6,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     super(scene, x, y, "player");
     scene.add.existing(this);
     scene.physics.add.existing(this);
-    this.setScale(2);
+    this.setScale(3);
     this.anims.createFromAseprite("player");
   }
 
