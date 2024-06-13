@@ -1,8 +1,10 @@
 import { Scene } from "phaser";
 import { Player } from "../entities/Player";
+import { Tower } from "../entities/Tower";
 
 export class StartScene extends Scene {
   private player: Player;
+  private tower: Tower;
   private cursors: Phaser.Types.Input.Keyboard.CursorKeys;
   private touchCursors: {
     left: Phaser.Input.Pointer;
@@ -15,6 +17,7 @@ export class StartScene extends Scene {
 
   create() {
     this.createBackground();
+    this.createTower();
     this.createPlayer();
     this.createCursors();
     this.createCamera();
@@ -22,20 +25,25 @@ export class StartScene extends Scene {
 
   update(time: number, delta: number): void {
     this.checkCursors();
+    this.checkCollisions();
   }
 
   createBackground() {
-    const tower = this.add.image(0, 0, "tower");
-    tower.setScale(4)
-    tower.setOrigin(0, 0)
+    this.cameras.main.setBackgroundColor("#70b5ee");
+  }
+
+  createTower() {
+    const x = this.game.canvas.width / 2;
+    const y = 0;
+    this.tower = new Tower(this, x, y);
   }
 
   createPlayer() {
     const x = this.game.canvas.width / 2;
-    const y = this.game.canvas.height;
+    const y = -100;
 
     this.player = new Player(this, x, y);
-    this.player.startClimb();
+    // this.player.startClimb();
   }
 
   createCursors() {
@@ -51,9 +59,20 @@ export class StartScene extends Scene {
   }
 
   createCamera() {
-    this.cameras.main.setBounds(0, 0, this.physics.world.bounds.width, 2000);
-    this.cameras.main.startFollow(this.player, false, 1, 1);
-    this.cameras.main.followOffset.set(0, 200);
+    const towerHeight = this.tower.getHeight() + 1000;
+    const x = -320;
+    const y = -towerHeight
+    const width = (160 * 4) + 420
+    const height = towerHeight;
+
+    this.cameras.main.setBounds(
+      x,
+      y,
+      width,
+      height
+    );
+    this.cameras.main.startFollow(this.player);
+    // this.cameras.main.followOffset.set(0, 200);
   }
 
   checkCursors() {
@@ -65,5 +84,28 @@ export class StartScene extends Scene {
       this.player.moveRight();
     }
 
+    if (this.cursors.up.isDown) {
+      this.player.moveUp();
+    }
+
+    if (this.cursors.down.isDown) {
+      this.player.moveDown();
+    }
+
+  }
+
+  checkCollisions() {
+    if (this.player.x < this.tower.x - this.tower.getWidth() / 2) {
+      this.player.x = this.tower.x - this.tower.getWidth() / 2
+    }
+    if (this.player.x > this.tower.x + this.tower.getWidth() / 2) {
+      this.player.x = this.tower.x + this.tower.getWidth() / 2
+    }
+    if (this.player.y > -100) {
+      this.player.y = -100
+    }
+    if (this.player.y < -this.tower.getHeight() - 50) {
+      this.player.y = -this.tower.getHeight() - 50
+    }
   }
 }
