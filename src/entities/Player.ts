@@ -1,6 +1,7 @@
 import { PLAYER_MOVE_SPEED, PLAYER_CLIMB_SPEED } from "../utils/Constants";
 
 export class Player extends Phaser.Physics.Arcade.Sprite {
+  private playerState: 'climbing' | 'moving' = 'climbing'
 
   constructor(scene: Phaser.Scene, x: number, y: number) {
     super(scene, x, y, "player");
@@ -26,13 +27,32 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   }
 
   public moveLeft() {
-    this.playClimbAnimation();
-    this.x -= PLAYER_MOVE_SPEED;
+    console.log(this.x)
+    if (this.playerState !== 'moving') {
+      this.playerState = 'moving';
+      this.scene.tweens.add({
+        targets: this,
+        x: this.x - PLAYER_MOVE_SPEED,
+        duration: 200,
+        onComplete: () => {
+          this.playerState = 'climbing';
+        }
+      })
+    }
   }
 
   public moveRight() {
-    this.playClimbAnimation();
-    this.x += PLAYER_MOVE_SPEED;
+    if (this.playerState !== 'moving') {
+      this.playerState = 'moving';
+      this.scene.tweens.add({
+        targets: this,
+        x: this.x + PLAYER_MOVE_SPEED,
+        duration: 200,
+        onComplete: () => {
+          this.playerState = 'climbing';
+        }
+      })
+    }
   }
 
   public stopMove() {

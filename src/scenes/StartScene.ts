@@ -1,6 +1,7 @@
 import { Scene } from "phaser";
 import { Player } from "../entities/Player";
 import { Tower } from "../entities/Tower";
+import { Fireman } from "../entities/Fireman";
 
 export class StartScene extends Scene {
   private player: Player;
@@ -21,6 +22,16 @@ export class StartScene extends Scene {
     this.createPlayer();
     this.createCursors();
     this.createCamera();
+
+    this.time.addEvent({
+      delay: 4000,
+      loop: true,
+      callback: () => {
+        const x = Phaser.Math.Between(100, 500)
+        const fireman = new Fireman(this, x, this.player.y - 600);
+        fireman.fall();
+      }
+    })
   }
 
   update(time: number, delta: number): void {
