@@ -29,7 +29,6 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   }
 
   public moveLeft() {
-    console.log(this.x)
     if (this.playerState !== 'moving') {
       this.playerState = 'moving';
       this.scene.tweens.add({

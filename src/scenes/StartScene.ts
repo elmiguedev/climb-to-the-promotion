@@ -2,7 +2,6 @@ import { Scene } from "phaser";
 import { Player } from "../entities/Player";
 import { Tower } from "../entities/Tower";
 import { Fireman } from "../entities/Fireman";
-import { Constructor } from "../entities/Constructor";
 
 export class StartScene extends Scene {
   private player: Player;
