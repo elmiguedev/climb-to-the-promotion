@@ -1,4 +1,4 @@
-import { PLAYER_MOVE_SPEED, PLAYER_CLIMB_SPEED } from "../utils/Constants";
+import { PLAYER_MOVE_SPEED, PLAYER_CLIMB_SPEED, PLAYER_DEPTH } from "../utils/Constants";
 
 export class Player extends Phaser.Physics.Arcade.Sprite {
   private playerState: 'climbing' | 'moving' = 'climbing'
@@ -9,6 +9,8 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     scene.physics.add.existing(this);
     this.setScale(3);
     this.anims.createFromAseprite("player");
+    this.body.setSize(16, 40);
+    this.setDepth(PLAYER_DEPTH);
   }
 
   public startClimb() {

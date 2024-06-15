@@ -15,11 +15,12 @@ export default new Game({
       gravity: {
         y: 0,
         x: 0
-      }
+      },
+      debug: true
     }
   },
   render: {
-    pixelArt: true
+    pixelArt: true,
   },
   scene: [
     BootloaderScene,

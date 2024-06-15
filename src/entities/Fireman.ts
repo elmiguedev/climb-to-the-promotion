@@ -1,3 +1,5 @@
+import { FIREMAN_DEPTH, FIREMAN_LINE_DEPTH } from "../utils/Constants";
+
 export class Fireman extends Phaser.Physics.Arcade.Sprite {
   private line: Phaser.GameObjects.Rectangle;
   private linePosition: { x: number, y: number };
@@ -12,7 +14,10 @@ export class Fireman extends Phaser.Physics.Arcade.Sprite {
     this.linePosition = { x: x, y: y };
     this.line.setVisible(false);
     this.line.setOrigin(0.5, 0);
-    this.setDepth(this.line.depth + 1)
+    this.line.setDepth(FIREMAN_LINE_DEPTH)
+    this.setDepth(FIREMAN_DEPTH)
+    this.body.setSize(16, 40);
+
   }
 
   public fall() {

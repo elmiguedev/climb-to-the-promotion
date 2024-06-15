@@ -2,6 +2,7 @@ import { Scene } from "phaser";
 import { Player } from "../entities/Player";
 import { Tower } from "../entities/Tower";
 import { Fireman } from "../entities/Fireman";
+import { Constructor } from "../entities/Constructor";
 
 export class StartScene extends Scene {
   private player: Player;
@@ -18,8 +19,8 @@ export class StartScene extends Scene {
 
   create() {
     this.createBackground();
-    this.createTower();
     this.createPlayer();
+    this.createTower();
     this.createCursors();
     this.createCamera();
 
@@ -30,6 +31,9 @@ export class StartScene extends Scene {
         const x = Phaser.Math.Between(100, 500)
         const fireman = new Fireman(this, x, this.player.y - 600);
         fireman.fall();
+        this.physics.add.overlap(this.player, fireman, () => {
+          this.scene.restart()
+        })
       }
     })
   }
@@ -46,7 +50,7 @@ export class StartScene extends Scene {
   createTower() {
     const x = this.game.canvas.width / 2;
     const y = 0;
-    this.tower = new Tower(this, x, y);
+    this.tower = new Tower(this, x, y, this.player);
   }
 
   createPlayer() {
