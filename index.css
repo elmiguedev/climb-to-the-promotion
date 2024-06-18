@@ -1,13 +1,13 @@
 html,
 body {
-  background: linear-gradient(135deg, rgb(39, 45, 91) 20%, rgb(78, 5, 40)) fixed rgb(39, 45, 91)
+  background: #70b5ee
 }
 
 canvas {
   display: block;
   margin: auto;
-  -webkit-box-shadow: 0px 2px 15px -3px #000000;
-  box-shadow: 0px 2px 15px -3px #000000;
+  /* -webkit-box-shadow: 0px 2px 15px -3px #000000;
+  box-shadow: 0px 2px 15px -3px #000000; */
 }
 
 #canvas {

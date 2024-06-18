@@ -58,6 +58,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
   public stopMove() {
     this.anims.stop();
+    this.setVelocityY(0);
   }
 
   private playClimbAnimation() {

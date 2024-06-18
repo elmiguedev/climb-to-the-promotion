@@ -7,10 +7,15 @@ export class StartScene extends Scene {
   private player: Player;
   private tower: Tower;
   private cursors: Phaser.Types.Input.Keyboard.CursorKeys;
+  private aswdCursors: {
+    left: Phaser.Input.Keyboard.Key;
+    right: Phaser.Input.Keyboard.Key;
+  };
   private touchCursors: {
     left: Phaser.Input.Pointer;
     right: Phaser.Input.Pointer;
   };
+  private stopKey: Phaser.Input.Keyboard.Key;
 
   constructor() {
     super("StartScene");
@@ -35,6 +40,29 @@ export class StartScene extends Scene {
         })
       }
     })
+
+    this.aswdCursors = {
+      left: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A),
+      right: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D),
+    };
+
+    this.aswdCursors.left.onDown = () => {
+      this.player.moveLeft();
+    }
+
+    this.aswdCursors.right.onDown = () => {
+      this.player.moveRight();
+    }
+
+    this.stopKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+
+    this.stopKey.onDown = () => {
+      this.player.stopMove();
+    }
+
+    this.stopKey.onUp = () => {
+      this.player.startClimb();
+    }
   }
 
   update(time: number, delta: number): void {
