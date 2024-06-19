@@ -22,6 +22,7 @@ export class AirConditioner extends Phaser.Physics.Arcade.Sprite {
       // timeScale: 1.5
     });
     this.scene.physics.add.overlap(this, this.target, () => {
+      this.scene.sound.play("hit");
       this.scene.scene.restart()
     });
   }

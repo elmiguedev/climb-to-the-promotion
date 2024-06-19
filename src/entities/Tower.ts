@@ -35,6 +35,11 @@ export class Tower {
     return this.FLOOR_WIDTH;
   }
 
+  public getPlayerFloor() {
+    const y = this.target.y;
+    const floor = Math.floor(Math.abs(y) / this.FLOOR_HEIGHT);
+    return floor;
+  }
 
   private createTower() {
     for (let i = 0; i < this.FLOOR_LENGTH; i++) {
@@ -50,7 +55,7 @@ export class Tower {
     floor.setOrigin(0.5, 1);
     floor.setScale(4);
     floor.setDepth(TOWER_DEPTH)
-    // this.createConstructor(x, y);
+    this.createConstructor(x, y);
     this.createAirConditioner(x, y);
   }
 

@@ -30,6 +30,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
   public moveLeft() {
     if (this.playerState !== 'moving') {
+      this.scene.sound.play("move");
       this.playerState = 'moving';
       this.scene.tweens.add({
         targets: this,
@@ -44,6 +45,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
   public moveRight() {
     if (this.playerState !== 'moving') {
+      this.scene.sound.play("move");
       this.playerState = 'moving';
       this.scene.tweens.add({
         targets: this,

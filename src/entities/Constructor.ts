@@ -16,6 +16,7 @@ export class Constructor extends Phaser.Physics.Arcade.Sprite {
     this.setDepth(CONSTRUCTOR_DEPTH)
     this.target = target;
     this.scene.physics.add.overlap(this, this.target, () => {
+      this.scene.sound.play("hit");
       this.scene.scene.restart()
     })
   }

@@ -1,11 +1,13 @@
-import { Scene } from "phaser";
+import { Game, Scene } from "phaser";
 import { Player } from "../entities/Player";
 import { Tower } from "../entities/Tower";
 import { Fireman } from "../entities/Fireman";
+import { GameHud } from "../hud/GameHud";
 
 export class StartScene extends Scene {
   private player: Player;
   private tower: Tower;
+  private hud: GameHud;
   private cursors: Phaser.Types.Input.Keyboard.CursorKeys;
   private aswdCursors: {
     left: Phaser.Input.Keyboard.Key;
@@ -27,6 +29,8 @@ export class StartScene extends Scene {
     this.createTower();
     this.createCursors();
     this.createCamera();
+    this.createHud();
+    this.createMusic();
 
     this.time.addEvent({
       delay: 4000,
@@ -36,6 +40,7 @@ export class StartScene extends Scene {
         const fireman = new Fireman(this, x, this.player.y - 600);
         fireman.fall();
         this.physics.add.overlap(this.player, fireman, () => {
+          this.sound.play("hit");
           this.scene.restart()
         })
       }
@@ -149,5 +154,18 @@ export class StartScene extends Scene {
     if (this.player.y < -this.tower.getHeight() - 50) {
       this.player.y = -this.tower.getHeight() - 50
     }
+  }
+
+  createHud() {
+    this.scene.run("GameHud");
+    this.hud = this.scene.get("GameHud") as GameHud;
+    this.hud.setTower(this.tower);
+  }
+
+  createMusic() {
+    this.sound.stopAll();
+    this.sound.play("bg", {
+      loop: true
+    })
   }
 }

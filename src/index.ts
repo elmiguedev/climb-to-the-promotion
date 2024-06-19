@@ -3,6 +3,7 @@ import { BootloaderScene } from "./scenes/BootloaderScene";
 import { StartScene } from "./scenes/StartScene";
 import { GameScene } from "./scenes/GameScene";
 import { GameOverScene } from "./scenes/GameOverScene";
+import { GameHud } from "./hud/GameHud";
 
 export default new Game({
   type: Phaser.AUTO,
@@ -16,7 +17,7 @@ export default new Game({
         y: 0,
         x: 0
       },
-      debug: true
+      debug: false
     }
   },
   render: {
@@ -26,6 +27,7 @@ export default new Game({
     BootloaderScene,
     StartScene,
     GameScene,
-    GameOverScene
+    GameOverScene,
+    GameHud
   ]
 })
