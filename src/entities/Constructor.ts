@@ -5,6 +5,8 @@ import { Player } from "./Player";
 export class Constructor extends Phaser.Physics.Arcade.Sprite {
   private target: Player;
   private bucket?: Bucket;
+  private buckets?: Phaser.Physics.Arcade.Group;
+
 
   constructor(scene: Phaser.Scene, x: number, y: number, target: Player) {
     super(scene, x, y, "constructor");
@@ -15,16 +17,13 @@ export class Constructor extends Phaser.Physics.Arcade.Sprite {
     this.body.setOffset(0, 90);
     this.setDepth(CONSTRUCTOR_DEPTH)
     this.target = target;
+    this.buckets = this.scene.physics.add.group({
+      runChildUpdate: true
+    })
     this.scene.physics.add.overlap(this, this.target, () => {
       this.scene.sound.play("hit");
       this.scene.scene.restart()
     })
-  }
-
-  public update() {
-    if (this.bucket && this.bucket.isTargetVisible(this.target)) {
-      this.bucket.drop();
-    }
   }
 
   public createBucket(position: 'left' | 'right' | 'center') {
@@ -42,7 +41,9 @@ export class Constructor extends Phaser.Physics.Arcade.Sprite {
         break;
     }
 
-    this.bucket = new Bucket(this.scene, x, y, this.target, true);
+    const bucket = new Bucket(this.scene, x, y, this.target, Math.random() < 0.5);
+    this.buckets.add(bucket);
+    bucket.setPosition(x, y);
   }
 
 

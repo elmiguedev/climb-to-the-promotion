@@ -20,6 +20,12 @@ export class Bucket extends Phaser.Physics.Arcade.Sprite {
     });
   }
 
+  update() {
+    if (this.isTargetVisible(this.target)) {
+      this.drop();
+    }
+  }
+
   public drop() {
     if (this.droppable && !this.activated) {
       this.activated = true;

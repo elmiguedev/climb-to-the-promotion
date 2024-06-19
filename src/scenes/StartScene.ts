@@ -32,20 +32,6 @@ export class StartScene extends Scene {
     this.createHud();
     this.createMusic();
 
-    this.time.addEvent({
-      delay: 4000,
-      loop: true,
-      callback: () => {
-        const x = Phaser.Math.Between(100, 500)
-        const fireman = new Fireman(this, x, this.player.y - 600);
-        fireman.fall();
-        this.physics.add.overlap(this.player, fireman, () => {
-          this.sound.play("hit");
-          this.scene.restart()
-        })
-      }
-    })
-
     this.aswdCursors = {
       left: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A),
       right: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D),

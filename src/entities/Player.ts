@@ -20,7 +20,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
   public moveUp() {
     this.playClimbAnimation();
-    this.y -= PLAYER_MOVE_SPEED;
+    this.y -= PLAYER_MOVE_SPEED / 10;
   }
 
   public moveDown() {
