@@ -48,9 +48,9 @@ export class Bucket extends Phaser.Physics.Arcade.Sprite {
     this.scene.add.tween({
       targets: this,
       x: this.x + 10,
-      duration: 100,
+      duration: 50,
       yoyo: true,
-      repeat: 6,
+      repeat: 2,
       onComplete: () => {
         this.fall();
       }
@@ -58,7 +58,7 @@ export class Bucket extends Phaser.Physics.Arcade.Sprite {
   }
 
   private fall() {
-    this.setVelocityY(300);
+    this.setVelocityY(400);
     this.scene.time.delayedCall(1000, () => {
       this.destroy();
     })
