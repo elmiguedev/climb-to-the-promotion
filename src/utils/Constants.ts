@@ -1,5 +1,5 @@
 export const PLAYER_MOVE_SPEED = 90;
-export const PLAYER_CLIMB_SPEED = 48;
+export const PLAYER_CLIMB_SPEED = 60;
 
 export const TOWER_DEPTH = 1;
 export const PLAYER_DEPTH = 2;

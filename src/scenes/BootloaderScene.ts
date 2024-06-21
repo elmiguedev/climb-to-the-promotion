@@ -18,6 +18,10 @@ import ShockJson from "../assets/sprites/globant/shock/shock.json";
 import MigoyaPng from "../assets/sprites/migoya/migoya.png";
 import MigoyaJson from "../assets/sprites/migoya/migoya.json";
 import GlobantBulletPng from "../assets/sprites/globantbullet/globantbullet.png";
+import RoarMp3 from "../assets/sounds/roar.mp3";
+import BossMp3 from "../assets/sounds/boss.mp3";
+import BossAttackMp3 from "../assets/sounds/bossattack.mp3";
+import GameOverMp3 from "../assets/sounds/gameover.mp3";
 
 export class BootloaderScene extends Scene {
   constructor() {
@@ -40,6 +44,10 @@ export class BootloaderScene extends Scene {
     this.load.audio("floor", [FloorWav]);
     this.load.audio("hit", [HitMp3]);
     this.load.audio("move", [MoveWav]);
+    this.load.audio("roar", [RoarMp3]);
+    this.load.audio("boss", [BossMp3]);
+    this.load.audio("bossattack", [BossAttackMp3]);
+    this.load.audio("gameover", [GameOverMp3]);
     this.load.once("complete", () => this.scene.start("StartScene"));
   }
 

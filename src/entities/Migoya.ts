@@ -62,7 +62,8 @@ export class Migoya extends Phaser.Physics.Arcade.Sprite {
   }
 
   public hit() {
-    if (!this.isHit) {
+    if (!this.isHit && !this.target.isDead) {
+      this.scene.sound.play("roar");
       this.hp--;
       this.setTintLevel();
       this.isHit = true;
@@ -89,19 +90,21 @@ export class Migoya extends Phaser.Physics.Arcade.Sprite {
 
   private attack() {
     console.log("Attack!");
+    this.scene.sound.play("bossattack");
     const y = this.y - 300;
     const x = Phaser.Math.Between(0, 400);
     const bullet = this.scene.physics.add.image(x, y, "globant_bullet");
     bullet.setScale(3);
     bullet.setAngle(90);
     bullet.setDepth(MIGOYA_BULLETS);
-    bullet.setVelocityY(400);
+    bullet.setVelocityY(500);
     this.anims.play({
       key: "attack",
       timeScale: 0.2,
     }, true)
     this.scene.physics.add.overlap(this.target, bullet, () => {
       this.target.hit();
+      bullet.destroy()
     })
 
     this.scene.time.delayedCall(2000, () => {

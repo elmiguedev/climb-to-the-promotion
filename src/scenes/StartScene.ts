@@ -59,6 +59,7 @@ export class StartScene extends Scene {
   update(time: number, delta: number): void {
     this.checkCursors();
     this.checkCollisions();
+    this.checkMusic();
   }
 
   createBackground() {
@@ -156,5 +157,15 @@ export class StartScene extends Scene {
     this.sound.play("bg", {
       loop: true
     })
+  }
+
+  checkMusic() {
+    if (!this.player.isDead && this.tower.isLastFloor()) {
+      const bossSong = this.sound.get("boss");
+      if (!bossSong || !bossSong.isPlaying) {
+        this.sound.stopAll();
+        this.sound.play("boss", { loop: true });
+      }
+    }
   }
 }

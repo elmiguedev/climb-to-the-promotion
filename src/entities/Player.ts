@@ -2,7 +2,7 @@ import { PLAYER_MOVE_SPEED, PLAYER_CLIMB_SPEED, PLAYER_DEPTH } from "../utils/Co
 
 export class Player extends Phaser.Physics.Arcade.Sprite {
   private playerState: 'climbing' | 'moving' = 'climbing'
-
+  public isDead: boolean = false;
   constructor(scene: Phaser.Scene, x: number, y: number) {
     super(scene, x, y, "player");
     scene.add.existing(this);
@@ -29,7 +29,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   }
 
   public moveLeft() {
-    if (this.playerState !== 'moving') {
+    if (this.playerState !== 'moving' && !this.isDead) {
       this.scene.sound.play("move");
       this.playerState = 'moving';
       this.scene.tweens.add({
@@ -44,7 +44,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   }
 
   public moveRight() {
-    if (this.playerState !== 'moving') {
+    if (this.playerState !== 'moving' && !this.isDead) {
       this.scene.sound.play("move");
       this.playerState = 'moving';
       this.scene.tweens.add({
@@ -72,11 +72,21 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   }
 
   public hit() {
-    this.scene.sound.play("hit");
-    this.scene.physics.pause();
-    this.scene.time.delayedCall(3000, () => {
-      this.scene.scene.restart();
-    })
+    if (!this.isDead) {
+      this.isDead = true;
+      this.scene.sound.removeAll();
+
+      this.scene.sound.play("hit");
+
+      this.anims.stop();
+      this.scene.physics.pause();
+      this.scene.time.delayedCall(1000, () => {
+        this.scene.sound.play("gameover");
+      })
+      this.scene.time.delayedCall(4000, () => {
+        this.scene.scene.restart();
+      })
+    }
   }
 
 }

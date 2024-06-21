@@ -171,7 +171,12 @@ export class Tower {
     const x = this.scene.game.canvas.width / 2
     const migoya = new Migoya(this.scene, x, y - 200 - this.FLOOR_HEIGHT, this.target);
     this.migoyaGroup.add(migoya);
-    migoya.setPosition(x, y - 200 - this.FLOOR_HEIGHT);
+    migoya.setPosition(x + 50, y - 200 - this.FLOOR_HEIGHT);
+  }
+
+  public isLastFloor() {
+    return this.target.y < -this.getHeight() + 300;
+    // return this.getPlayerFloor() === this.FLOOR_LENGTH - 1
   }
 
 }
