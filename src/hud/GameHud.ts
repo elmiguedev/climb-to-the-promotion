@@ -20,6 +20,12 @@ export class GameHud extends Scene {
       fontFamily: "half_bold_pixel",
       fontSize: "48px",
       color: "#FFFFFF",
+      backgroundColor: "black",
+      padding: {
+        x: 20,
+        y: 20
+      }
+
     })
   }
 

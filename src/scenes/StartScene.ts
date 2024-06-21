@@ -3,6 +3,7 @@ import { Player } from "../entities/Player";
 import { Tower } from "../entities/Tower";
 import { Fireman } from "../entities/Fireman";
 import { GameHud } from "../hud/GameHud";
+import { PLAYER_MOVE_SPEED } from "../utils/Constants";
 
 export class StartScene extends Scene {
   private player: Player;
@@ -132,11 +133,14 @@ export class StartScene extends Scene {
   }
 
   checkCollisions() {
-    if (this.player.x < this.tower.x - this.tower.getWidth() / 2) {
-      this.player.x = this.tower.x - this.tower.getWidth() / 2
+    const center = this.game.canvas.width / 2;
+    const minX = center - (PLAYER_MOVE_SPEED * 2);
+    const maxX = center + (PLAYER_MOVE_SPEED * 2);
+    if (this.player.x <= minX) {
+      this.player.x = minX
     }
-    if (this.player.x > this.tower.x + this.tower.getWidth() / 2) {
-      this.player.x = this.tower.x + this.tower.getWidth() / 2
+    if (this.player.x >= maxX) {
+      this.player.x = maxX
     }
     if (this.player.y > -100) {
       this.player.y = -100
