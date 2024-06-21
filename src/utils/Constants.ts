@@ -12,3 +12,4 @@ export const GLOBANT_BG_DEPTH = 1;
 export const GLOBANT_DEPTH = 1;
 export const SHOCK_DEPTH = 2;
 export const MIGOYA_DEPTH = 0;
+export const MIGOYA_BULLETS = 3;

@@ -81,12 +81,15 @@ export class StartScene extends Scene {
 
   createCursors() {
     const halfScreen = this.game.canvas.width / 2;
+    const halfY = this.game.canvas.height / 3;
     this.cursors = this.input.keyboard.createCursorKeys();
     this.input.on("pointerdown", (pointer: Phaser.Input.Pointer) => {
-      if (pointer.x < halfScreen) {
-        this.player.moveLeft();
-      } else {
-        this.player.moveRight();
+      if (pointer.y > halfY * 2) {
+        if (pointer.x < halfScreen) {
+          this.player.moveLeft();
+        } else {
+          this.player.moveRight();
+        }
       }
     })
   }
@@ -137,8 +140,8 @@ export class StartScene extends Scene {
     if (this.player.y > -100) {
       this.player.y = -100
     }
-    if (this.player.y < -this.tower.getHeight() - 50) {
-      this.player.y = -this.tower.getHeight() - 50
+    if (this.player.y < -this.tower.getHeight() + 100) {
+      this.player.y = -this.tower.getHeight() + 100
     }
   }
 

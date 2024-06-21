@@ -16,6 +16,8 @@ import GlobantBgPng from "../assets/sprites/globant/globant-bg.png";
 import ShockPng from "../assets/sprites/globant/shock/shock.png";
 import ShockJson from "../assets/sprites/globant/shock/shock.json";
 import MigoyaPng from "../assets/sprites/migoya/migoya.png";
+import MigoyaJson from "../assets/sprites/migoya/migoya.json";
+import GlobantBulletPng from "../assets/sprites/globantbullet/globantbullet.png";
 
 export class BootloaderScene extends Scene {
   constructor() {
@@ -31,7 +33,8 @@ export class BootloaderScene extends Scene {
     this.load.image("bucket", BucketPng);
     this.load.image("globant", GlobantPng);
     this.load.image("globant_bg", GlobantBgPng);
-    this.load.image("migoya", MigoyaPng);
+    this.load.image("globant_bullet", GlobantBulletPng);
+    this.load.aseprite("migoya", MigoyaPng, MigoyaJson);
     this.load.aseprite("airconditioner", AirConditionerPng, AirConditionerJson);
     this.load.audio("bg", [BgMp3]);
     this.load.audio("floor", [FloorWav]);

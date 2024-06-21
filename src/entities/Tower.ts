@@ -14,6 +14,7 @@ export class Tower {
   private constructors: Phaser.Physics.Arcade.Group;
   private airConditioners: Phaser.Physics.Arcade.Group;
   private globantGroup: Phaser.Physics.Arcade.Group;
+  private migoyaGroup: Phaser.Physics.Arcade.Group;
 
   constructor(
     private scene: Phaser.Scene,
@@ -28,6 +29,9 @@ export class Tower {
       runChildUpdate: true
     });
     this.globantGroup = this.scene.physics.add.group({
+      runChildUpdate: true
+    })
+    this.migoyaGroup = this.scene.physics.add.group({
       runChildUpdate: true
     })
     this.target = player;
@@ -167,7 +171,8 @@ export class Tower {
   private createMigoya(y: number) {
     const x = this.scene.game.canvas.width / 2
     const migoya = new Migoya(this.scene, x, y - 200 - this.FLOOR_HEIGHT, this.target);
-
+    this.migoyaGroup.add(migoya);
+    migoya.setPosition(x, y - 200 - this.FLOOR_HEIGHT);
   }
 
 }
