@@ -4,6 +4,7 @@ import { StartScene } from "./scenes/StartScene";
 import { GameScene } from "./scenes/GameScene";
 import { GameOverScene } from "./scenes/GameOverScene";
 import { GameHud } from "./hud/GameHud";
+import { PreBootloaderScene } from "./scenes/PreBootloaderScene";
 
 export default new Game({
   type: Phaser.AUTO,
@@ -23,7 +24,9 @@ export default new Game({
   render: {
     pixelArt: true,
   },
+  backgroundColor: "#70b5ee",
   scene: [
+    PreBootloaderScene,
     BootloaderScene,
     StartScene,
     GameScene,

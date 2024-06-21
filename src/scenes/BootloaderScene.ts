@@ -23,7 +23,13 @@ import BossMp3 from "../assets/sounds/boss.mp3";
 import BossAttackMp3 from "../assets/sounds/bossattack.mp3";
 import GameOverMp3 from "../assets/sounds/gameover.mp3";
 
+
+
 export class BootloaderScene extends Scene {
+
+  private MINI_TOWER_HEIGHT = 36;
+  private MAX_FLOOR_COUNT = 10;
+
   constructor() {
     super("BootloaderScene");
   }
@@ -48,9 +54,28 @@ export class BootloaderScene extends Scene {
     this.load.audio("boss", [BossMp3]);
     this.load.audio("bossattack", [BossAttackMp3]);
     this.load.audio("gameover", [GameOverMp3]);
+
+    this.load.on("progress", (value: number) => {
+      this.createFloor(value);
+    })
     this.load.once("complete", () => this.scene.start("StartScene"));
   }
 
   create() {
+    this.cameras.main.setBackgroundColor("#70b5ee");
+  }
+
+  private createFloor(value) {
+    const floor = Math.floor(value * 100 / this.MAX_FLOOR_COUNT);
+    console.log(floor)
+    const x = this.game.canvas.width / 2;
+    const baseY = this.game.canvas.height;
+    const y = baseY - floor * this.MINI_TOWER_HEIGHT;
+
+    if (floor < 10)
+      this.add.image(x, y, "minitower");
+    else
+      this.add.image(x, y, "miniglobant");
+
   }
 }
