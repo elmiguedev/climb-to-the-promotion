@@ -15,8 +15,7 @@ export class Bucket extends Phaser.Physics.Arcade.Sprite {
     this.droppable = droppable;
     this.setDepth(BUCKET_DEPTH);
     this.scene.physics.add.overlap(this, this.target, () => {
-      this.scene.sound.play("hit");
-      this.scene.scene.restart()
+      this.target.hit();
     });
   }
 

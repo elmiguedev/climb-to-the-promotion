@@ -153,8 +153,7 @@ export class Tower {
           const fireman = new Fireman(this.scene, x, this.target.y - 600);
           fireman.fall();
           this.scene.physics.add.overlap(this.target, fireman, () => {
-            this.scene.sound.play("hit");
-            this.scene.scene.restart()
+            this.target.hit();
           })
         }
       }

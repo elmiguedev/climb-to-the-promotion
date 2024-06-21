@@ -101,8 +101,7 @@ export class Migoya extends Phaser.Physics.Arcade.Sprite {
       timeScale: 0.2,
     }, true)
     this.scene.physics.add.overlap(this.target, bullet, () => {
-      this.scene.sound.play("hit");
-      this.scene.scene.restart();
+      this.target.hit();
     })
 
     this.scene.time.delayedCall(2000, () => {

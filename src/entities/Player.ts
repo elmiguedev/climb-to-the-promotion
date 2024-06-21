@@ -71,4 +71,12 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     }, true);
   }
 
+  public hit() {
+    this.scene.sound.play("hit");
+    this.scene.physics.pause();
+    this.scene.time.delayedCall(3000, () => {
+      this.scene.scene.restart();
+    })
+  }
+
 }
