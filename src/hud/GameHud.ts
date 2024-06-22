@@ -11,6 +11,10 @@ export class GameHud extends Scene {
     super("GameHud");
   }
 
+  setVisible(visible: boolean) {
+    this.txtFloor.setVisible(visible);
+  }
+
   setTower(tower: Tower) {
     this.tower = tower;
   }
@@ -26,7 +30,7 @@ export class GameHud extends Scene {
         y: 20
       }
 
-    })
+    }).setVisible(false);
   }
 
   update(): void {

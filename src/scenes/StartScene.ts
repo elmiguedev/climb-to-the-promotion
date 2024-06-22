@@ -55,6 +55,9 @@ export class StartScene extends Scene {
     this.stopKey.onUp = () => {
       this.player.startClimb();
     }
+
+
+
   }
 
   update(time: number, delta: number): void {
@@ -71,6 +74,7 @@ export class StartScene extends Scene {
     const x = this.game.canvas.width / 2;
     const y = 0;
     this.tower = new Tower(this, x, y, this.player);
+    this.tower.createTower();
   }
 
   createPlayer() {
@@ -78,7 +82,7 @@ export class StartScene extends Scene {
     const y = -100;
 
     this.player = new Player(this, x, y);
-    this.player.startClimb();
+    // this.player.startClimb();
   }
 
   createCursors() {
@@ -109,8 +113,33 @@ export class StartScene extends Scene {
       width,
       height
     );
-    this.cameras.main.startFollow(this.player);
-    this.cameras.main.followOffset.set(width, 200);
+    // this.cameras.main.startFollow(this.player);
+    // this.cameras.main.followOffset.set(width, 200);
+
+    // const xc = this.game.canvas.width / 2;
+    // this.cameras.main.pan(
+    //   xc,
+    //   this.tower.getHeight(),
+    //   5000,
+    //   "Cubic.easeInOut", true
+    // )
+
+    // Crear una animación para mover la cámara desde arriba hacia abajo
+    this.cameras.main.scrollY = -this.tower.getHeight() - 400;
+    this.tweens.add({
+      targets: this.cameras.main,
+      scrollY: -this.cameras.main.height,
+      ease: 'Quart.easeInOut', // Tipo de animación
+      duration: 5000, // Duración de la animación en milisegundos
+      onComplete: () => {
+        // this.time.delayedCall(1000, () => {
+        this.cameras.main.startFollow(this.player);
+        this.cameras.main.followOffset.set(width, 200);
+
+        this.player.startClimb();
+        // })
+      }
+    });
   }
 
   checkCursors() {
@@ -154,6 +183,7 @@ export class StartScene extends Scene {
     this.scene.run("GameHud");
     this.hud = this.scene.get("GameHud") as GameHud;
     this.hud.setTower(this.tower);
+    // this.hud.setVisible(false);
   }
 
   createMusic() {

@@ -7,7 +7,7 @@ import { Migoya } from "./Migoya";
 import { Player } from "./Player";
 
 export class Tower {
-  private FLOOR_LENGTH = 3;
+  private FLOOR_LENGTH = 30;
   private FLOOR_HEIGHT = 180 * 4;
   private FLOOR_WIDTH = 160 * 4;
   private target: Player;
@@ -35,7 +35,7 @@ export class Tower {
       runChildUpdate: true
     })
     this.target = player;
-    this.createTower();
+    // this.createTower();
   }
 
   public getHeight() {
@@ -52,7 +52,7 @@ export class Tower {
     return floor;
   }
 
-  private createTower() {
+  public createTower() {
     for (let i = 0; i < this.FLOOR_LENGTH; i++) {
       this.createFloor(
         this.x,
