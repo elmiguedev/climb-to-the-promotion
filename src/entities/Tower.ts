@@ -35,7 +35,6 @@ export class Tower {
       runChildUpdate: true
     })
     this.target = player;
-    // this.createTower();
   }
 
   public getHeight() {
@@ -172,11 +171,16 @@ export class Tower {
     const migoya = new Migoya(this.scene, x, y - 200 - this.FLOOR_HEIGHT, this.target);
     this.migoyaGroup.add(migoya);
     migoya.setPosition(x + 30, y - 200 - this.FLOOR_HEIGHT);
+    this.migoyaGroup.setVisible(false);
   }
 
   public isLastFloor() {
+    if (this.getPlayerFloor() === this.FLOOR_LENGTH - 1) {
+      this.migoyaGroup.setVisible(true);
+    }
     return this.target.y < -this.getHeight() + 300;
     // return this.getPlayerFloor() === this.FLOOR_LENGTH - 1
   }
+
 
 }

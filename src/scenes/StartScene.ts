@@ -137,6 +137,8 @@ export class StartScene extends Scene {
         this.cameras.main.followOffset.set(width, 200);
 
         this.player.startClimb();
+        this.hud.setVisible(true);
+
         // })
       }
     });
@@ -183,7 +185,6 @@ export class StartScene extends Scene {
     this.scene.run("GameHud");
     this.hud = this.scene.get("GameHud") as GameHud;
     this.hud.setTower(this.tower);
-    // this.hud.setVisible(false);
   }
 
   createMusic() {
