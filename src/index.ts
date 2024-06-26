@@ -1,7 +1,7 @@
 import { Game } from "phaser";
 import { BootloaderScene } from "./scenes/BootloaderScene";
-import { StartScene } from "./scenes/StartScene";
 import { GameScene } from "./scenes/GameScene";
+import { StartScene } from "./scenes/StartScene";
 import { GameOverScene } from "./scenes/GameOverScene";
 import { GameHud } from "./hud/GameHud";
 import { PreBootloaderScene } from "./scenes/PreBootloaderScene";

@@ -6,5 +6,8 @@ export default ({ mode }) => {
 
   return defineConfig({
     base: './',
+    build: {
+      outDir: 'docs'
+    }
   });
 }
