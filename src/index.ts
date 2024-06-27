@@ -5,6 +5,7 @@ import { StartScene } from "./scenes/StartScene";
 import { GameOverScene } from "./scenes/GameOverScene";
 import { GameHud } from "./hud/GameHud";
 import { PreBootloaderScene } from "./scenes/PreBootloaderScene";
+import { WinScene } from "./scenes/WinScene";
 
 export default new Game({
   type: Phaser.AUTO,
@@ -31,6 +32,7 @@ export default new Game({
     StartScene,
     GameScene,
     GameOverScene,
-    GameHud
+    GameHud,
+    WinScene
   ]
 })

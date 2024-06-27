@@ -1,5 +1,4 @@
 import { Scene } from "phaser";
-import { Player } from "../entities/Player";
 import { Tower } from "../entities/Tower";
 
 export class GameHud extends Scene {
@@ -29,7 +28,6 @@ export class GameHud extends Scene {
         x: 20,
         y: 20
       }
-
     }).setVisible(false);
   }
 

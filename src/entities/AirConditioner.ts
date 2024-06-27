@@ -36,7 +36,6 @@ export class AirConditioner extends Phaser.Physics.Arcade.Sprite {
     if (!this.target) return;
     const yDiff = this.target.y - this.y;
     const xDiff = this.target.x - this.x - 40;
-    console.log(Math.abs(xDiff));
     if (yDiff < 300 && Math.abs(xDiff) < 80) {
       return true;
     } else {

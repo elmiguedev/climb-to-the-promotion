@@ -3,6 +3,8 @@ import { PLAYER_MOVE_SPEED, PLAYER_CLIMB_SPEED, PLAYER_DEPTH } from "../utils/Co
 export class Player extends Phaser.Physics.Arcade.Sprite {
   private playerState: 'climbing' | 'moving' = 'climbing'
   public isDead: boolean = false;
+  public isWinner: boolean = false;
+
   constructor(scene: Phaser.Scene, x: number, y: number) {
     super(scene, x, y, "player");
     scene.add.existing(this);

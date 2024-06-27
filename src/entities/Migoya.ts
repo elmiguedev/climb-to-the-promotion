@@ -6,6 +6,7 @@ export class Migoya extends Phaser.Physics.Arcade.Sprite {
   private isActive: boolean = false;
   private isHit: boolean = false;
   private hp: number = 20;
+  private attackTimer: Phaser.Time.TimerEvent;
 
   constructor(scene: Phaser.Scene, x: number, y: number, target: Player) {
     super(scene, x, y, "migoya");
@@ -15,7 +16,7 @@ export class Migoya extends Phaser.Physics.Arcade.Sprite {
     this.anims.createFromAseprite("migoya");
     this.anims.play("idle")
     this.setScale(3);
-    this.setDepth(1);
+    this.setDepth(0);
 
     this.on("animationcomplete", (animation) => {
       if (animation.key !== "idle") {
@@ -50,9 +51,8 @@ export class Migoya extends Phaser.Physics.Arcade.Sprite {
   }
 
   private startAttack() {
-    console.log("start attack");
     this.isActive = true;
-    this.scene.time.addEvent({
+    this.attackTimer = this.scene.time.addEvent({
       delay: 2000,
       callback: () => {
         this.attack();
@@ -65,6 +65,12 @@ export class Migoya extends Phaser.Physics.Arcade.Sprite {
     if (!this.isHit && !this.target.isDead) {
       this.scene.sound.play("roar");
       this.hp--;
+
+      if (this.hp <= 0) {
+        this.kill();
+        return;
+      }
+
       this.setTintLevel();
       this.isHit = true;
       this.shake();
@@ -89,7 +95,6 @@ export class Migoya extends Phaser.Physics.Arcade.Sprite {
   }
 
   private attack() {
-    console.log("Attack!");
     this.scene.sound.play("bossattack");
     const y = this.y - 300;
     const x = Phaser.Math.Between(0, 400);
@@ -113,6 +118,48 @@ export class Migoya extends Phaser.Physics.Arcade.Sprite {
       }
     })
   }
+
+  private kill() {
+    this.target.isWinner = true;
+    this.scene.tweens.add({
+      targets: this,
+      x: this.x + 10,
+      duration: 20,
+      repeat: -1,
+      yoyo: true,
+    });
+
+    this.anims.play("hit", true);
+
+    const bossSound = this.scene.sound.get("boss");
+    if (bossSound && bossSound.isPlaying) {
+      bossSound.stop();
+    }
+
+    const s = this.scene.sound.play("roar", {
+      loop: true,
+    });
+
+    this.scene.time.delayedCall(2900, () => {
+      this.scene.sound.stopAll();
+      this.scene.scene.start("WinScene")
+
+    });
+
+
+    this.attackTimer.destroy();
+    this.scene.tweens.add({
+      targets: this,
+      y: -600,
+      duration: 14000,
+      onComplete: () => {
+        this.destroy();
+      }
+    })
+
+
+  }
+
 
   private setTintLevel() {
     if (this.hp < 4) {

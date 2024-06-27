@@ -195,7 +195,7 @@ export class GameScene extends Scene {
   }
 
   checkMusic() {
-    if (!this.player.isDead && this.tower.isLastFloor()) {
+    if (!this.player.isDead && !this.player.isWinner && this.tower.isLastFloor()) {
       const bossSong = this.sound.get("boss");
       if (!bossSong || !bossSong.isPlaying) {
         this.sound.stopAll();

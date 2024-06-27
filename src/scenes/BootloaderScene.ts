@@ -22,8 +22,10 @@ import RoarMp3 from "../assets/sounds/roar.mp3";
 import BossMp3 from "../assets/sounds/boss.mp3";
 import BossAttackMp3 from "../assets/sounds/bossattack.mp3";
 import GameOverMp3 from "../assets/sounds/gameover.mp3";
-
-
+import IorioPng from "../assets/sprites/iorio/iorio.png";
+import ArgentinaPng from "../assets/sprites/argentina/argenitina.png";
+import ArgentinaJson from "../assets/sprites/argentina/argenitina.json";
+import SeVoMp3 from "../assets/sounds/sevo.mp3";
 
 export class BootloaderScene extends Scene {
 
@@ -37,6 +39,7 @@ export class BootloaderScene extends Scene {
   preload() {
     this.load.aseprite("player", PlayerPng, PlayerJson);
     this.load.aseprite("shock", ShockPng, ShockJson);
+    this.load.aseprite("argentina", ArgentinaPng, ArgentinaJson);
     this.load.image("tower", TowerPng);
     this.load.image("fireman", FiremanPng);
     this.load.image("constructor", ConstructorPng);
@@ -44,6 +47,7 @@ export class BootloaderScene extends Scene {
     this.load.image("globant", GlobantPng);
     this.load.image("globant_bg", GlobantBgPng);
     this.load.image("globant_bullet", GlobantBulletPng);
+    this.load.image("iorio", IorioPng);
     this.load.aseprite("migoya", MigoyaPng, MigoyaJson);
     this.load.aseprite("airconditioner", AirConditionerPng, AirConditionerJson);
     this.load.audio("bg", [BgMp3]);
@@ -54,11 +58,12 @@ export class BootloaderScene extends Scene {
     this.load.audio("boss", [BossMp3]);
     this.load.audio("bossattack", [BossAttackMp3]);
     this.load.audio("gameover", [GameOverMp3]);
+    this.load.audio("sevo", [SeVoMp3]);
 
     this.load.on("progress", (value: number) => {
       this.createFloor(value);
     })
-    this.load.once("complete", () => this.scene.start("StartScene"));
+    this.load.once("complete", () => this.scene.start("GameScene"));
   }
 
   create() {
@@ -67,7 +72,6 @@ export class BootloaderScene extends Scene {
 
   private createFloor(value) {
     const floor = Math.floor(value * 100 / this.MAX_FLOOR_COUNT);
-    console.log(floor)
     const x = this.game.canvas.width / 2;
     const baseY = this.game.canvas.height;
     const y = baseY - floor * this.MINI_TOWER_HEIGHT;
