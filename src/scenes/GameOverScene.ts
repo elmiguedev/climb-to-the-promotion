@@ -1,4 +1,5 @@
 import { Scene } from "phaser";
+import { GameHud } from "../hud/GameHud";
 
 export class GameOverScene extends Scene {
   constructor() {
@@ -7,6 +8,10 @@ export class GameOverScene extends Scene {
 
   create() {
     this.cameras.main.setBackgroundColor(0x000000)
+    const hud = this.scene.get("GameHud") as GameHud;
+    if (hud) {
+      hud.setVisible(false);
+    }
     const x = this.game.canvas.width / 2;
     const jugar = this.add.text(x, 100, "- Jugar de nuevo - ", {
       fontFamily: "half_bold_pixel",
